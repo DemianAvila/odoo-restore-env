@@ -1,0 +1,21 @@
+FROM            python:3.12-bookworm
+WORKDIR         /src
+COPY            ./build/scripts .
+COPY            .env .
+COPY            modules-list.env .
+WORKDIR         /root/.ssh
+COPY            ssh/    .
+RUN             apt update -y
+RUN             apt install less git gcc python3-pip libldap2-dev libpq-dev libsasl2-dev \
+                procps less postgresql -y
+RUN             ssh-keyscan github.com >> ~/.ssh/known_hosts
+WORKDIR         /   
+RUN             bash /src/clone-odoo.sh
+WORKDIR         /odoo
+RUN             pip install -r requirements.txt
+WORKDIR         /extra-addons
+RUN             bash /src/clone-addons.sh
+WORKDIR         /odoo   
+#RUN             python3 ./odoo-bin --db_host=odoo_db --db_port=5432  \
+#--db_user=odoo  --db_password=a -d odoo \
+#--addons-path=./addons --init --stop-after-init &

@@ -14,12 +14,14 @@ debug_odoo_image:
 	make create_network
 	docker run --entrypoint=/bin/bash -it \
 	-p 8069:8069 --network odoo \
+	-v ./extra-addons:/extra-addons \
 	--name odoo odoo
 
 run_odoo: 
 	make create_network
 	docker run \
 	-p 8069:8069 --network odoo \
+	-v ./extra-addons:/extra-addons \
 	--name odoo -d odoo 
 
 enter_odoo_container:	

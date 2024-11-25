@@ -15,7 +15,14 @@ WORKDIR         /odoo
 RUN             pip install -r requirements.txt
 WORKDIR         /extra-addons
 RUN             bash /src/clone-addons.sh
-WORKDIR         /odoo   
+WORKDIR         /src
+
+
+RUN             chmod -R 777 /extra-addons
+
+#RUN 
 #RUN             python3 ./odoo-bin --db_host=odoo_db --db_port=5432  \
 #--db_user=odoo  --db_password=a -d odoo \
 #--addons-path=./addons --init --stop-after-init &
+
+#RUN bash -c "source .env && python3 ./install_addons.py --addons-path '/extra-addons' --db-name 'odoo' --db-user \"${POSTGRES_USER}\"  --db-password \"${POSTGRES_PASSWORD}\" --db-host 'odoo_db'"

@@ -8,4 +8,8 @@ do
   echo ${repo}
   echo ${branch}
   git clone ${repo} --depth 1 --branch ${branch}
+  repo_name=$(echo "$repo" | sed -E 's|.*/([^/]+)\.git$|\1|; s|.*/||')
+  cd ${repo_name}
+  git submodule update --init --recursive
+
 done < "$file"

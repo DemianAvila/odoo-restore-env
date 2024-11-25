@@ -3,3 +3,4 @@ modules-list.env
 ssh/*
 prev_data/*
 data/*
+extra-addons/*

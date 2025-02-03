@@ -6,7 +6,7 @@ COPY            modules-list.env .
 WORKDIR         /root/.ssh
 COPY            ssh/    .
 RUN             apt update -y
-RUN             apt install less git gcc python3-pip libldap2-dev libpq-dev libsasl2-dev \
+RUN             apt install less git gcc python3-pip libldap2-dev libpq-dev libsasl2-dev vim \
                 procps less postgresql -y
 RUN             ssh-keyscan github.com >> ~/.ssh/known_hosts
 WORKDIR         /   
@@ -25,4 +25,4 @@ RUN             chmod -R 777 /extra-addons
 #--db_user=odoo  --db_password=a -d odoo \
 #--addons-path=./addons --init --stop-after-init &
 
-#RUN bash -c "source .env && python3 ./install_addons.py --addons-path '/extra-addons' --db-name 'odoo' --db-user \"${POSTGRES_USER}\"  --db-password \"${POSTGRES_PASSWORD}\" --db-host 'odoo_db'"
+#RUN bash -c "source .env && python3 ./install_addons.py --addons-path '/extra-addons' --db-name 'odoo' --db-user 'odoo'  --db-password '0D0o' --db-host 'odoo_db'"
